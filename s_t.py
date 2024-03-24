@@ -11,12 +11,7 @@ from gtts import gTTS
 from googletrans import Translator
 
 # Definir el estilo del botón
-button_style = """
-    background-color: #000000; 
-    color: #FFFFFF;
-    border-radius: 5px;
-    border-color: #000000;
-"""
+button_style = "background-color: #000000; color: #FFFFFF; border-radius: 5px; border-color: #000000;"
 
 st.title("CocinaFacil - Tu Asistente de Cocina Personalizado")
 
@@ -27,8 +22,8 @@ st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal
 
 st.write("Toca el botón y cuéntanos tu receta")
 
-# Crear el botón con el estilo personalizado
-stt_button = Button(label="Comienza", width=200, button_type="primary", style=button_style)
+# Crear el botón con los estilos personalizados
+stt_button = Button(label="Comienza", width=200, button_type="primary", css_classes=["my_button"])
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
