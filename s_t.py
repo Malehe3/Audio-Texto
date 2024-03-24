@@ -12,7 +12,7 @@ from googletrans import Translator
 
 st.title("CocinaFacil - Tu Asistente de Cocina Personalizado")
 
-image = Image.open('ratitaChef3.png')
+image = Image.open('RatitaChef3.png')
 st.image(image, width=200, caption='Tu:')
 
 st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal! Aquí podrás narrar tus recetas para que otras personas puedan conocer y disfrutar al máximo de tus creaciones culinarias.")
