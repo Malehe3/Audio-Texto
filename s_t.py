@@ -10,18 +10,20 @@ import glob
 from gtts import gTTS
 from googletrans import Translator
 
+# Título y descripción del sitio
 st.title("CocinaFacil - Tu Asistente de Cocina Personalizado")
+st.subheader("¡BIENVENIDO A COCINAFACIL CON CHEFIA! AQUÍ PODRÁS NARRAR TUS RECETAS PARA QUE OTRAS PERSONAS PUEDAN CONOCER Y DISFRUTAR AL MÁXIMO DE TUS CREACIONES CULINARIAS.")
 
+# Imagen representativa
 image = Image.open('RatitaChef3.png')
 st.image(image, width=200, caption='Tu:')
 
+# Introducción
 st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal! Aquí podrás narrar tus recetas para que otras personas puedan conocer y disfrutar al máximo de tus creaciones culinarias.")
 
-
+# Botón de inicio
 st.write("Toca el botón y cuentanos tu receta")
-
-stt_button = Button(label="Inicio", width=200)
-
+stt_button = Button(label="Comienza", width=200)
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
     recognition.continuous = true;
@@ -34,13 +36,14 @@ stt_button.js_on_event("button_click", CustomJS(code="""
                 value += e.results[i][0].transcript;
             }
         }
-        if ( value != "") {
+        if (value != "") {
             document.dispatchEvent(new CustomEvent("GET_TEXT", {detail: value}));
         }
     }
     recognition.start();
-    """))
+"""))
 
+# Captura del texto y conversión a audio
 result = streamlit_bokeh_events(
     stt_button,
     events="GET_TEXT",
