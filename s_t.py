@@ -7,24 +7,18 @@ from PIL import Image
 import time
 import glob
 
-
-
 from gtts import gTTS
 from googletrans import Translator
 
-
-st.title("Interfaces Multimodales")
-st.subheader("TRADUCTOR")
-
+st.title("CocinaFacil - Tu Asistente de Cocina Personalizado")
+st.subheader("TIENES GANAS DE QUE TODOS CONOZCAN TUS RECETAS, PUEDES HACERLO SOLO CON DECIRLAS Y TE LAS PASAMOS A VARIOS IDIOMAS")
 
 image = Image.open('RatitaChef3.png')
-
 st.image(image)
 
+st.write("Toca el botón y habla lo que quieres traducir")
 
-st.write("Toca el Botón y habla lo que quires traducir")
-
-stt_button = Button(label=" Inicio ", width=200)
+stt_button = Button(label="Inicio", width=200)
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
@@ -145,7 +139,7 @@ if result:
     
     display_output_text = st.checkbox("Mostrar el texto")
     
-    if st.button("convertir"):
+    if st.button("Convertir"):
         result, output_text = text_to_speech(input_language, output_language, text, tld)
         audio_file = open(f"temp/{result}.mp3", "rb")
         audio_bytes = audio_file.read()
@@ -168,7 +162,7 @@ if result:
                     print("Deleted ", f)
 
     remove_files(7)
-           
+
 
 
         
