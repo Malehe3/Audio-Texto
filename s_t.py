@@ -165,7 +165,6 @@ if result:
 
     remove_files(7)
 
-
         
     
 
