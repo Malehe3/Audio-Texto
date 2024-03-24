@@ -10,6 +10,14 @@ import glob
 from gtts import gTTS
 from googletrans import Translator
 
+# Definir el estilo del botón
+button_style = """
+    background-color: #000000; 
+    color: #FFFFFF;
+    border-radius: 5px;
+    border-color: #000000;
+"""
+
 st.title("CocinaFacil - Tu Asistente de Cocina Personalizado")
 
 image = Image.open('RatitaChef3.png')
@@ -17,10 +25,10 @@ st.image(image, width=200, caption='Tu:')
 
 st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal! Aquí podrás narrar tus recetas para que otras personas puedan conocer y disfrutar al máximo de tus creaciones culinarias.")
 
+st.write("Toca el botón y cuéntanos tu receta")
 
-st.write("Toca el botón y cuentanos tu receta")
-
-stt_button = Button(label="Comienza", width=200, button_type="primary")
+# Crear el botón con el estilo personalizado
+stt_button = Button(label="Comienza", width=200, button_type="primary", style=button_style)
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
@@ -165,6 +173,5 @@ if result:
 
     remove_files(7)
 
-    
 
 
