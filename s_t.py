@@ -11,12 +11,14 @@ from gtts import gTTS
 from googletrans import Translator
 
 st.title("CocinaFacil - Tu Asistente de Cocina Personalizado")
-st.subheader("TIENES GANAS DE QUE TODOS CONOZCAN TUS RECETAS, PUEDES HACERLO SOLO CON DECIRLAS Y TE LAS PASAMOS A VARIOS IDIOMAS")
 
-image = Image.open('RatitaChef3.png')
-st.image(image)
+image = Image.open('ratitaChef3.png')
+st.image(image, width=200, caption='Tu:')
 
-st.write("Toca el botón y habla lo que quieres traducir")
+st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal! Aquí podrás narrar tus recetas para que otras personas puedan conocer y disfrutar al máximo de tus creaciones culinarias.")
+
+
+st.write("Toca el botón y cuentanos tu receta")
 
 stt_button = Button(label="Inicio", width=200)
 
