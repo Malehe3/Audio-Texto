@@ -25,7 +25,10 @@ button_style = """
         .st-ff {
             background-color: black !important;
             color: white !important;
-            border-color: white !important;
+            border-color: transparent !important;
+            border-radius: 0px !important;
+            margin: 0px !important;
+            box-shadow: none !important;
         }
     </style>
 """
@@ -73,13 +76,17 @@ if result:
     text = str(result.get("GET_TEXT"))
     in_lang = st.selectbox(
         "Selecciona el lenguaje de Entrada",
-        ("Inglés", "Español", "Bengali", "Coreano", "Mandarín", "Japonés"),
+        ("Inglés", "Español", "Alemán", "Francés", "Bengalí", "Coreano", "Mandarín", "Japonés"),
     )
     if in_lang == "Inglés":
         input_language = "en"
     elif in_lang == "Español":
         input_language = "es"
-    elif in_lang == "Bengali":
+    elif in_lang == "Alemán":
+        input_language = "de"
+    elif in_lang == "Francés":
+        input_language = "fr"
+    elif in_lang == "Bengalí":
         input_language = "bn"
     elif in_lang == "Coreano":
         input_language = "ko"
@@ -90,13 +97,17 @@ if result:
 
     out_lang = st.selectbox(
         "Selecciona el lenguaje de salida",
-        ("Inglés", "Español", "Bengali", "Coreano", "Mandarín", "Japonés"),
+        ("Inglés", "Español", "Alemán", "Francés", "Bengalí", "Coreano", "Mandarín", "Japonés"),
     )
     if out_lang == "Inglés":
         output_language = "en"
     elif out_lang == "Español":
         output_language = "es"
-    elif out_lang == "Bengali":
+    elif out_lang == "Alemán":
+        output_language = "de"
+    elif out_lang == "Francés":
+        output_language = "fr"
+    elif out_lang == "Bengalí":
         output_language = "bn"
     elif out_lang == "Coreano":
         output_language = "ko"
@@ -123,7 +134,6 @@ if result:
         tld = "com"
     elif english_accent == "Español":
         tld = "com.mx"
-
     elif english_accent == "Reino Unido":
         tld = "co.uk"
     elif english_accent == "Estados Unidos":
