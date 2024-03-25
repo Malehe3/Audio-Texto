@@ -15,7 +15,7 @@ st.title("CocinaFacil - Tu Asistente de Cocina Personalizado")
 image = Image.open('RatitaChef3.png')
 st.image(image, width=200)
 
-st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal! Aquí podrás narrar tus recetas para que otras personas puedan conocer y disfrutar al máximo de tus creaciones culinarias.")
+st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal! Aquí podrás narrar tus recetas para que otras personas hasta de diferentes partes del mundo, puedan conocer y disfrutar al máximo de tus creaciones culinarias.")
 
 st.write("Toca el botón y cuentanos tu receta")
 
