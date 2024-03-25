@@ -29,17 +29,6 @@ button_style = """
             border-radius: 0px !important;
             margin: 0px !important;
             box-shadow: none !important;
-            padding: 0.25rem 0.5rem !important;
-            display: inline-block !important;
-            text-align: center !important;
-            text-decoration: none !important;
-            cursor: pointer !important;
-            font-size: 1rem !important;
-            line-height: 1.5 !important;
-        }
-        .st-ff:hover {
-            background-color: #333 !important;
-            color: white !important;
         }
     </style>
 """
@@ -173,7 +162,7 @@ if result:
 
     display_output_text = st.checkbox("Mostrar el texto")
 
-    if st.button("Convertir"):
+    if st.button("Convertir", css_classes=['st-ff']):
         result, output_text = text_to_speech(input_language, output_language, text, tld)
         audio_file = open(f"temp/{result}.mp3", "rb")
         audio_bytes = audio_file.read()
@@ -196,5 +185,3 @@ if result:
                     print("Deleted ", f)
 
     remove_files(7)
-
-
