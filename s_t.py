@@ -35,7 +35,7 @@ button_style = """
 
 st.markdown(button_style, unsafe_allow_html=True)
 
-stt_button = Button(label="Comienza", width=200, button_type="dark", css_classes=['st-ff'])
+stt_button = Button(label="Comienza", css_classes=['st-ff'])
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
