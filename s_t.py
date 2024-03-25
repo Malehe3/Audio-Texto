@@ -1,7 +1,5 @@
 import os
 import streamlit as st
-from streamlit.components.v1 import html
-from streamlit_bokeh_events import streamlit_bokeh_events
 from PIL import Image
 import time
 import glob
@@ -9,8 +7,30 @@ import glob
 from gtts import gTTS
 from googletrans import Translator
 
-# Definir el estilo del botón
-button_style = "background-color: #000000; color: #FFFFFF; border-radius: 5px; border-color: #000000;"
+st.set_page_config(
+    page_title="CocinaFacil - Tu Asistente de Cocina Personalizado",
+    page_icon=":shrimp:",
+    layout="wide"
+)
+
+# Estilo CSS para el botón
+st.markdown(
+    """
+    <style>
+    .stButton>button {
+        background-color: #000000 !important;
+        color: #FFFFFF !important;
+        border-radius: 5px;
+        border-color: #000000;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        width: 200px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 st.title("CocinaFacil - Tu Asistente de Cocina Personalizado")
 
@@ -22,37 +42,36 @@ st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal
 st.write("Toca el botón y cuéntanos tu receta")
 
 # HTML personalizado para el botón
-button_html = f"""
-<button onclick="startRecording()" style="{button_style}">Comienza</button>
+button_html = """
+<div class="stButton">
+  <button onclick="startRecording()">Comienza</button>
+</div>
 <script>
-function startRecording() {{
+function startRecording() {
     var recognition = new webkitSpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
-    recognition.onresult = function (e) {{
+    recognition.onresult = function (e) {
         var value = "";
-        for (var i = e.resultIndex; i < e.results.length; ++i) {{
-            if (e.results[i].isFinal) {{
+        for (var i = e.resultIndex; i < e.results.length; ++i) {
+            if (e.results[i].isFinal) {
                 value += e.results[i][0].transcript;
-            }}
-        }}
-        if (value != "") {{
-            document.dispatchEvent(new CustomEvent("GET_TEXT", {{detail: value}}));
-        }}
-    }};
+            }
+        }
+        if (value !== "") {
+            document.dispatchEvent(new CustomEvent("GET_TEXT", {detail: value}));
+        }
+    };
     recognition.start();
-}}
+}
 </script>
 """
 
 # Mostrar el botón HTML personalizado
-html(button_html)
+st.markdown(button_html, unsafe_allow_html=True)
 
 # Recibir el resultado del reconocimiento de voz
-result = streamlit_bokeh_events(
-    key="listen",
-    refresh_on_update=False,
-    debounce_time=0)
+result = st._legacy_widget("bokeh_events", key="listen", debounce_time=0, default=None)
 
 if result:
     if "GET_TEXT" in result:
