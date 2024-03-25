@@ -22,9 +22,9 @@ st.write("Toca el botón y cuentanos tu receta")
 button_style = """
     <style>
         .st-ff {
-            background-color: black !important;
-            color: black !important;
-            border-color: black !important;
+            background-color: red !important;
+            color: red !important;
+            border-color: red !important;
         }
     </style>
 """
