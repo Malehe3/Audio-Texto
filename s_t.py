@@ -19,20 +19,6 @@ st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal
 
 st.write("Toca el botón y cuentanos tu receta")
 
-# CSS for the buttons
-button_style = """
-    <style>
-        .st-ff {
-            background-color: black !important;
-            color: black !important;
-            border-color: white !important;
-            border-radius: 3px !important;
-            margin: 3px !important;
-            box-shadow: none !important;
-        }
-    </style>
-"""
-
 st.markdown(button_style, unsafe_allow_html=True)
 
 stt_button = Button(label="Comienza", width=200, button_type="success", css_classes=['st-ff'])
@@ -184,5 +170,4 @@ if result:
                     os.remove(f)
                     print("Deleted ", f)
 
-    remove_files(7) 
-
+    remove_files(7)
