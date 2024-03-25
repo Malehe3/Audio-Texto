@@ -19,6 +19,17 @@ st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal
 
 st.write("Toca el botón y cuentanos tu receta")
 
+# CSS for the button
+button_style = """
+    <style>
+        .st-ff {
+            background-color: black !important;
+            color: white !important;
+            border-color: white !important;
+        }
+    </style>
+"""
+
 st.markdown(button_style, unsafe_allow_html=True)
 
 stt_button = Button(label="Comienza", width=200, button_type="success", css_classes=['st-ff'])
@@ -148,7 +159,7 @@ if result:
 
     display_output_text = st.checkbox("Mostrar el texto")
 
-    if st.button("Convertir", css_classes=['st-ff']):
+    if st.button("Convertir"):
         result, output_text = text_to_speech(input_language, output_language, text, tld)
         audio_file = open(f"temp/{result}.mp3", "rb")
         audio_bytes = audio_file.read()
@@ -169,5 +180,7 @@ if result:
                 if os.stat(f).st_mtime < now - n_days:
                     os.remove(f)
                     print("Deleted ", f)
+
+    remove_files(7)
 
     remove_files(7)
