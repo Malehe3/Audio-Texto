@@ -19,19 +19,7 @@ st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal
 
 st.write("Toca el botón y cuentanos tu receta")
 
-button_style = """
-    <style>
-        .st-ff {
-            background-color: red !important;
-            color: red !important;
-            border-color: red !important;
-        }
-    </style>
-"""
-
-st.markdown(button_style, unsafe_allow_html=True)
-
-stt_button = Button(label="Comienza", width=200, css_classes=['st-ff'])
+stt_button = Button(label="Comienza", width=200, button_type="success")
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
@@ -181,4 +169,5 @@ if result:
                     print("Deleted ", f)
 
     remove_files(7)
+
 
