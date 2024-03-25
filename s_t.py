@@ -11,7 +11,7 @@ from gtts import gTTS
 from googletrans import Translator
 
 # Definir el estilo del botón
-button_style = "background-color: #000000; color: #FFFFFF; border-radius: 5px; border-color: #000000;"
+button_style = "background-color: #000000 !important; color: #FFFFFF !important; border-radius: 5px; border-color: #000000;"
 
 st.title("CocinaFacil - Tu Asistente de Cocina Personalizado")
 
@@ -23,7 +23,7 @@ st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal
 st.write("Toca el botón y cuéntanos tu receta")
 
 # Crear el botón con los estilos personalizados
-stt_button = Button(label="Comienza", width=200, button_type="primary", css_classes=["my_button"])
+stt_button = Button(label="Comienza", width=200, button_type="primary", css_classes=["my_button"], style=button_style)
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
@@ -167,6 +167,4 @@ if result:
                     print("Deleted ", f)
 
     remove_files(7)
-
-
 
