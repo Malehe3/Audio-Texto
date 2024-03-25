@@ -1,9 +1,6 @@
 import os
 import streamlit as st
 from PIL import Image
-import time
-import glob
-
 from gtts import gTTS
 from googletrans import Translator
 
@@ -71,11 +68,10 @@ function startRecording() {
 st.markdown(button_html, unsafe_allow_html=True)
 
 # Recibir el resultado del reconocimiento de voz
-result = st._legacy_widget("bokeh_events", key="listen", debounce_time=0, default=None)
+result = st._server_ctx.events.get('GET_TEXT')
 
 if result:
-    if "GET_TEXT" in result:
-        st.write(result.get("GET_TEXT"))
+    st.write(result)
     try:
         os.mkdir("temp")
     except:
@@ -83,7 +79,7 @@ if result:
     st.title("Texto a Audio")
     translator = Translator()
     
-    text = str(result.get("GET_TEXT"))
+    text = str(result)
     in_lang = st.selectbox(
         "Selecciona el lenguaje de Entrada",
         ("Inglés", "Español", "Bengali", "Coreano", "Mandarín", "Japonés"),
@@ -188,5 +184,3 @@ if result:
                     print("Deleted ", f)
 
     remove_files(7)
-
-
