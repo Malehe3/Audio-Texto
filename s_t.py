@@ -19,6 +19,22 @@ st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal
 
 st.write("Toca el botón y cuentanos tu receta")
 
+# CSS for the buttons
+button_style = """
+    <style>
+        .st-ff {
+            background-color: black !important;
+            color: white !important;
+            border-color: transparent !important;
+            border-radius: 0px !important;
+            margin: 0px !important;
+            box-shadow: none !important;
+        }
+    </style>
+"""
+
+st.markdown(button_style, unsafe_allow_html=True)
+
 # Definir una clase de estilo común
 button_class = 'st-ff'
 
@@ -173,4 +189,24 @@ if result:
 
     remove_files(7)
 
+# Botón negro con el mismo diseño que "Convertir"
+convert_button = Button(label="Comienza", css_classes=[button_class])
+convert_button.js_on_event("button_click", CustomJS(code="""
+    var recognition = new webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    recognition.onresult = function (e) {
+        var value = "";
+        for (var i = e.resultIndex; i < e.results.length; ++i) {
+            if (e.results[i].isFinal) {
+                value += e.results[i][0].transcript;
+            }
+        }
+        if ( value != "") {
+            document.dispatchEvent(new CustomEvent("GET_TEXT", {detail: value}));
+        }
+    }
+    recognition.start();
+    """))
 
