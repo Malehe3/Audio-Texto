@@ -19,7 +19,19 @@ st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal
 
 st.write("Toca el botón y cuentanos tu receta")
 
-stt_button = Button(label="Comienza", width=200, button_type="dark")
+button_style = """
+    <style>
+        .st-ff {
+            background-color: white !important;
+            color: white !important;
+            border-color: white !important;
+        }
+    </style>
+"""
+
+st.markdown(button_style, unsafe_allow_html=True)
+
+stt_button = Button(label="Comienza", width=200, css_classes=['st-ff'])
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
