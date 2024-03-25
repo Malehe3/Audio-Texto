@@ -51,6 +51,7 @@ result = streamlit_bokeh_events(
 
 if result:
     if "GET_TEXT" in result:
+        st.write("Tu receta es:")
         st.write(result.get("GET_TEXT"))
     try:
         os.mkdir("temp")
