@@ -19,7 +19,7 @@ st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal
 
 st.write("Toca el botón y cuentanos tu receta")
 
-stt_button.("Comienza")
+if stt_button.("Comienza"):
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
