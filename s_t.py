@@ -19,20 +19,6 @@ st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal
 
 st.write("Toca el botón y cuentanos tu receta")
 
-# CSS for the buttons
-button_style = """
-    <style>
-        .st-ff {
-            background-color: black !important;
-            color: white !important;
-            border-color: transparent !important;
-            border-radius: 0px !important;
-            margin: 0px !important;
-            box-shadow: none !important;
-        }
-    </style>
-"""
-
 st.markdown(button_style, unsafe_allow_html=True)
 
 stt_button = Button(label="Comienza", width=200, button_type="success", css_classes=['st-ff'])
