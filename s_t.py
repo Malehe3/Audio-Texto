@@ -1,7 +1,6 @@
 import os
 import streamlit as st
-from bokeh.models.widgets import Button
-from bokeh.models import CustomJS
+from streamlit.components.v1 import html
 from streamlit_bokeh_events import streamlit_bokeh_events
 from PIL import Image
 import time
@@ -11,7 +10,7 @@ from gtts import gTTS
 from googletrans import Translator
 
 # Definir el estilo del botón
-button_style = "background-color: #000000 !important; color: #FFFFFF !important; border-radius: 5px; border-color: #000000;"
+button_style = "background-color: #000000; color: #FFFFFF; border-radius: 5px; border-color: #000000;"
 
 st.title("CocinaFacil - Tu Asistente de Cocina Personalizado")
 
@@ -22,34 +21,37 @@ st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal
 
 st.write("Toca el botón y cuéntanos tu receta")
 
-# Crear el botón con los estilos personalizados
-stt_button = Button(label="Comienza", width=200, button_type="primary", css_classes=["my_button"], style=button_style)
-
-stt_button.js_on_event("button_click", CustomJS(code="""
+# HTML personalizado para el botón
+button_html = f"""
+<button onclick="startRecording()" style="{button_style}">Comienza</button>
+<script>
+function startRecording() {{
     var recognition = new webkitSpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
- 
-    recognition.onresult = function (e) {
+    recognition.onresult = function (e) {{
         var value = "";
-        for (var i = e.resultIndex; i < e.results.length; ++i) {
-            if (e.results[i].isFinal) {
+        for (var i = e.resultIndex; i < e.results.length; ++i) {{
+            if (e.results[i].isFinal) {{
                 value += e.results[i][0].transcript;
-            }
-        }
-        if ( value != "") {
-            document.dispatchEvent(new CustomEvent("GET_TEXT", {detail: value}));
-        }
-    }
+            }}
+        }}
+        if (value != "") {{
+            document.dispatchEvent(new CustomEvent("GET_TEXT", {{detail: value}}));
+        }}
+    }};
     recognition.start();
-    """))
+}}
+</script>
+"""
 
+# Mostrar el botón HTML personalizado
+html(button_html)
+
+# Recibir el resultado del reconocimiento de voz
 result = streamlit_bokeh_events(
-    stt_button,
-    events="GET_TEXT",
     key="listen",
     refresh_on_update=False,
-    override_height=75,
     debounce_time=0)
 
 if result:
@@ -167,4 +169,5 @@ if result:
                     print("Deleted ", f)
 
     remove_files(7)
+
 
