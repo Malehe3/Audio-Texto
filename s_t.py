@@ -24,10 +24,10 @@ button_style = """
     <style>
         .st-ff {
             background-color: black !important;
-            color: white !important;
-            border-color: transparent !important;
-            border-radius: 0px !important;
-            margin: 0px !important;
+            color: black !important;
+            border-color: white !important;
+            border-radius: 3px !important;
+            margin: 3px !important;
             box-shadow: none !important;
         }
     </style>
