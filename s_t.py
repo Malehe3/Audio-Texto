@@ -35,10 +35,7 @@ button_style = """
 
 st.markdown(button_style, unsafe_allow_html=True)
 
-# Definir una clase de estilo común
-button_class = 'st-ff'
-
-stt_button = Button(label="Comienza", css_classes=[button_class])
+stt_button = Button(label="Comienza", width=200, button_type="success", css_classes=['st-ff'])
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
@@ -165,7 +162,7 @@ if result:
 
     display_output_text = st.checkbox("Mostrar el texto")
 
-    if st.button("Convertir", css_classes=[button_class]):
+    if st.button("Convertir", css_classes=['st-ff']):
         result, output_text = text_to_speech(input_language, output_language, text, tld)
         audio_file = open(f"temp/{result}.mp3", "rb")
         audio_bytes = audio_file.read()
@@ -188,25 +185,3 @@ if result:
                     print("Deleted ", f)
 
     remove_files(7)
-
-# Botón negro con el mismo diseño que "Convertir"
-convert_button = Button(label="Comienza", css_classes=[button_class])
-convert_button.js_on_event("button_click", CustomJS(code="""
-    var recognition = new webkitSpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-
-    recognition.onresult = function (e) {
-        var value = "";
-        for (var i = e.resultIndex; i < e.results.length; ++i) {
-            if (e.results[i].isFinal) {
-                value += e.results[i][0].transcript;
-            }
-        }
-        if ( value != "") {
-            document.dispatchEvent(new CustomEvent("GET_TEXT", {detail: value}));
-        }
-    }
-    recognition.start();
-    """))
-
