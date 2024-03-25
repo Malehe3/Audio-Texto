@@ -35,7 +35,10 @@ button_style = """
 
 st.markdown(button_style, unsafe_allow_html=True)
 
-stt_button = Button(label="Comienza", css_classes=['st-ff'])
+# Definir una clase de estilo común
+button_class = 'st-ff'
+
+stt_button = Button(label="Comienza", css_classes=[button_class])
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
@@ -162,7 +165,7 @@ if result:
 
     display_output_text = st.checkbox("Mostrar el texto")
 
-    if st.button("Convertir", css_classes=['st-ff']):
+    if st.button("Convertir", css_classes=[button_class]):
         result, output_text = text_to_speech(input_language, output_language, text, tld)
         audio_file = open(f"temp/{result}.mp3", "rb")
         audio_bytes = audio_file.read()
