@@ -156,19 +156,20 @@ if result:
         st.audio(audio_bytes, format="audio/mp3", start_time=0)
 
         if display_output_text:
-            st.write(f"## Ahora puedes compartir tu receta con más personas")
-            st.write(f" {output_text}")
+    st.write(f"## Ahora puedes compartir tu receta con más personas")
+    st.write(f" {output_text}")
 
 
-    def remove_files(n):
-        mp3_files = glob.glob("temp/*mp3")
-        if len(mp3_files) != 0:
-            now = time.time()
-            n_days = n * 86400
-            for f in mp3_files:
-                if os.stat(f).st_mtime < now - n_days:
-                    os.remove(f)
-                    print("Deleted ", f)
+def remove_files(n):
+    mp3_files = glob.glob("temp/*mp3")
+    if len(mp3_files) != 0:
+        now = time.time()
+        n_days = n * 86400
+        for f in mp3_files:
+            if os.stat(f).st_mtime < now - n_days:
+                os.remove(f)
+                print("Deleted ", f)
+
 
     remove_files(7)
     st.subheader("¡Ayúdanos a mejorar tu experiencia! Por favor, califica CocinaFacil:")
