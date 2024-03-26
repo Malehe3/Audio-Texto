@@ -17,7 +17,7 @@ st.image(image, width=200)
 
 st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal! Aquí podrás narrar tus recetas para que otras personas hasta de diferentes partes del mundo, puedan conocer y disfrutar al máximo de tus creaciones culinarias.")
 
-st.write("Toca el botón y cuentanos tu receta")
+st.subheader("Toca el botón y cuentanos tu receta")
 
 stt_button = Button(label="Comienza", width=200, button_type="success")
 #Button(label="Comienza", width=200, button_type="success")
@@ -51,7 +51,7 @@ result = streamlit_bokeh_events(
 
 if result:
     if "GET_TEXT" in result:
-        st.subheader("Tú receta:")
+        st.subheader("Instrucciones para hacer preparación: ")
         st.write(result.get("GET_TEXT"))
     try:
         os.mkdir("temp")
