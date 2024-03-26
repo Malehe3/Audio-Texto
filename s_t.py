@@ -51,7 +51,7 @@ result = streamlit_bokeh_events(
 
 if result:
     if "GET_TEXT" in result:
-        st.write("Tu receta es:")
+        st.subheader("Tú receta:")
         st.write(result.get("GET_TEXT"))
     try:
         os.mkdir("temp")
@@ -61,7 +61,7 @@ if result:
 
     text = str(result.get("GET_TEXT"))
     in_lang = st.selectbox(
-        "Selecciona el lenguaje de Entrada",
+        ""Elige el idioma en el que compartiste tu receta",
         ("Inglés", "Español", "Alemán", "Francés", "Bengalí", "Coreano", "Mandarín", "Japonés"),
     )
     if in_lang == "Inglés":
@@ -82,7 +82,7 @@ if result:
         input_language = "ja"
 
     out_lang = st.selectbox(
-        "Selecciona el lenguaje de salida",
+        "Elige el idioma en el que quieres compartartir tu receta",
         ("Inglés", "Español", "Alemán", "Francés", "Bengalí", "Coreano", "Mandarín", "Japonés"),
     )
     if out_lang == "Inglés":
@@ -103,7 +103,7 @@ if result:
         output_language = "ja"
 
     english_accent = st.selectbox(
-        "Selecciona el acento",
+        "Elige un acento",
         (
             "Defecto",
             "Español",
@@ -148,7 +148,7 @@ if result:
 
     display_output_text = st.checkbox("Mostrar el texto")
 
-    if st.button("Convertir"):
+    if st.button("Aceptar"):
         result, output_text = text_to_speech(input_language, output_language, text, tld)
         audio_file = open(f"temp/{result}.mp3", "rb")
         audio_bytes = audio_file.read()
