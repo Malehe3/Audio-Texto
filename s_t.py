@@ -156,7 +156,7 @@ if result:
         st.audio(audio_bytes, format="audio/mp3", start_time=0)
 
         if display_output_text:
-            st.markdown(f"## Ahora puedes compartir tu receta con más personas")
+            st.write(f"## Ahora puedes compartir tu receta con más personas")
             st.write(f" {output_text}")
 
 
@@ -171,5 +171,12 @@ if result:
                     print("Deleted ", f)
 
     remove_files(7)
+     st.subheader("¡Ayúdanos a mejorar tu experiencia! Por favor, califica CocinaFacil:")
+    calificacion = st.slider("Califica de 1 a 5 estrellas", 1, 5)
+
+    if calificacion:
+        st.write(f"¡Gracias por tu calificación de {calificacion} estrellas!")
+
+
 
 
