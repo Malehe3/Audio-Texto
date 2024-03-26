@@ -156,7 +156,7 @@ if result:
         st.audio(audio_bytes, format="audio/mp3", start_time=0)
 
         if display_output_text:
-            st.markdown(f"## Texto de salida:")
+            st.markdown(f"## Receta:")
             st.write(f" {output_text}")
 
 
