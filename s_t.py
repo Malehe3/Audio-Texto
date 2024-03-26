@@ -156,7 +156,7 @@ if result:
         st.audio(audio_bytes, format="audio/mp3", start_time=0)
 
         if display_output_text:
-            st.write(f"#### Ahora puedes compartir tu receta con más personas")
+            st.write(f"### Ahora puedes compartir tu receta con más personas")
             st.write(f" {output_text}")
 
 
