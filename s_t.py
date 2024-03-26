@@ -61,7 +61,7 @@ if result:
 
     text = str(result.get("GET_TEXT"))
     in_lang = st.selectbox(
-        ""Elige el idioma en el que compartiste tu receta",
+        "Elige el idioma en el que compartiste tu receta",
         ("Inglés", "Español", "Alemán", "Francés", "Bengalí", "Coreano", "Mandarín", "Japonés"),
     )
     if in_lang == "Inglés":
