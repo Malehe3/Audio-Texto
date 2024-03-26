@@ -17,7 +17,7 @@ st.image(image, width=200)
 
 st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal! Aquí podrás narrar tus recetas para que otras personas hasta de diferentes partes del mundo, puedan conocer y disfrutar al máximo de tus creaciones culinarias.")
 
-st.subheader(""Pulsa el botón y compártenos tu receta"")
+st.subheader("Pulsa el botón y compártenos tu receta")
 
 stt_button = Button(label="Comienza", width=200, button_type="success")
 #Button(label="Comienza", width=200, button_type="success")
