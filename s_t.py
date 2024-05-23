@@ -30,7 +30,7 @@ st.write("""
 ## ¡Ponlo en Práctica!
 Captura una característica distintiva, ya sea física, de personalidad o relacionada con una experiencia memorable y crea tu propia seña:
 """)
-st.write("Presiona el boton Comienza y di la palabra camara para activarla ")
+st.write("Presiona el boton Comienza y di la palabra foto para activarla ")
 
 # Configuración del botón de reconocimiento de voz
 stt_button = Button(label="Comienza", width=200, button_type="success")
@@ -66,7 +66,6 @@ if result and "GET_TEXT" in result:
     command = result.get("GET_TEXT")
     st.write(f"Comando detectado: {command}")
     if "foto" in command.lower():
-        st.write("¡Se detectó la palabra 'foto'! Capturando imagen...")
         img_file_buffer = st.camera_input("Toma una Foto")
 
         if img_file_buffer is not None:
