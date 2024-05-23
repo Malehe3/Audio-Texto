@@ -1,9 +1,7 @@
-import os
 import streamlit as st
-from bokeh.models.widgets import Button
-from bokeh.models import CustomJS
-from streamlit_bokeh_events import streamlit_bokeh_events
 from PIL import Image, ImageDraw, ImageFont
+import cv2
+import numpy as np
 
 # Título de la aplicación
 st.title("¡Aprende Lenguaje de Señas Colombiano!")
@@ -30,60 +28,62 @@ st.write("""
 ## ¡Ponlo en Práctica!
 Captura una característica distintiva, ya sea física, de personalidad o relacionada con una experiencia memorable y crea tu propia seña:
 """)
-st.write("Presiona el boton Comienza y di la palabra camara para activarla ")
 
-# Configuración del botón de reconocimiento de voz
-stt_button = Button(label="Comienza", width=200, button_type="success")
-stt_button.js_on_event("button_click", CustomJS(code="""
-    var recognition = new webkitSpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
+# Función para capturar imagen desde la cámara
+def take_photo():
+    cap = cv2.VideoCapture(0)
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+        cv2.imshow('Captura de imagen', frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):  # Presiona 'q' para salir
+            break
+    cap.release()
+    cv2.destroyAllWindows()
+    return frame
 
-    recognition.onresult = function (e) {
-        var value = "";
-        for (var i = e.resultIndex; i < e.results.length; ++i) {
-            if (e.results[i].isFinal) {
-                value += e.results[i][0].transcript;
-            }
-        }
-        if (value.toLowerCase().includes("foto")) {
-            document.dispatchEvent(new CustomEvent("GET_TEXT", {detail: value}));
-        }
-    }
-    recognition.start();
-"""))
+# Función para detectar la palabra clave y capturar la imagen
+def detect_and_capture(keyword):
+    captured_image = None
+    cap = cv2.VideoCapture(0)
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+        cv2.imshow('Captura de imagen', frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):  # Presiona 'q' para salir
+            break
+        if keyword in st.microphone_input("Habla ahora...", key="my_mic"):
+            captured_image = frame
+            break
+    cap.release()
+    cv2.destroyAllWindows()
+    return captured_image
 
-# Funcionalidad de captura de imagen
-result = streamlit_bokeh_events(
-    stt_button,
-    events="GET_TEXT",
-    key="listen",
-    refresh_on_update=False,
-    override_height=75,
-    debounce_time=0)
+# Capturar imagen al detectar la palabra clave "foto"
+if st.button("Tomar Foto"):
+    st.write("Escucha la palabra 'foto' para capturar la imagen...")
+    keyword = "foto"
+    captured_image = detect_and_capture(keyword)
+    if captured_image is not None:
+        # Convertir la imagen capturada a formato Pillow y mostrarla
+        captured_image = cv2.cvtColor(captured_image, cv2.COLOR_BGR2RGB)
+        pil_image = Image.fromarray(captured_image)
+        st.image(pil_image, caption="Tu Señal de Identificación")
 
-if result and "GET_TEXT" in result:
-    command = result.get("GET_TEXT")
-    st.write(f"Comando detectado: {command}")
-    if "foto" in command.lower():
-        st.write("¡Se detectó la palabra 'foto'! Capturando imagen...")
-        img_file_buffer = st.camera_input("Toma una Foto")
-
-        if img_file_buffer is not None:
-            image = Image.open(img_file_buffer)
-            st.image(image, caption="Tu Señal de Identificación")
-
-            # Guardar imagen y agregar botón de descarga
-            image.save("señal_identificacion.jpg")
-            st.download_button(
-                label="Descargar",
-                data=open("señal_identificacion.jpg", "rb").read(),
-                file_name="señal_identificacion.jpg",
-                mime="image/jpeg"
-            )
+        # Guardar la imagen y agregar botón de descarga
+        pil_image.save("señal_identificacion.jpg")
+        st.download_button(
+            label="Descargar",
+            data=open("señal_identificacion.jpg", "rb").read(),
+            file_name="señal_identificacion.jpg",
+            mime="image/jpeg"
+        )
 
 # Sección para compartir la señal
 st.write("""
 ### ¡Comparte tu Señal!
 Una vez que hayas creado tu señal de identificación, compártela con tus amigos y familiares para que puedan reconocerte fácilmente en la comunidad.
 """)
+
