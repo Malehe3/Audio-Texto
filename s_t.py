@@ -10,15 +10,6 @@ import glob
 from gtts import gTTS
 from googletrans import Translator
 
-st.title("CocinaFacil - Tu Asistente de Cocina Personalizado")
-
-image = Image.open('RatitaChef3.png')
-st.image(image, width=200)
-
-st.write("¡Bienvenido a CocinaFacil con ChefIA, tu asistente de cocina personal! Aquí podrás narrar tus recetas para que otras personas hasta de diferentes partes del mundo, puedan conocer y disfrutar al máximo de tus creaciones culinarias.")
-
-st.subheader("Pulsa el botón y compártenos tu receta")
-
 stt_button = Button(label="Comienza", width=200, button_type="success")
 #Button(label="Comienza", width=200, button_type="success")
 
@@ -57,94 +48,6 @@ if result:
         os.mkdir("temp")
     except:
         pass
-    translator = Translator()
-
-    text = str(result.get("GET_TEXT"))
-    in_lang = st.selectbox(
-        "Elige el idioma en el que compartiste tu receta",
-        ("Inglés", "Español", "Alemán", "Francés", "Bengalí", "Coreano", "Mandarín", "Japonés"),
-    )
-    if in_lang == "Inglés":
-        input_language = "en"
-    elif in_lang == "Español":
-        input_language = "es"
-    elif in_lang == "Alemán":
-        input_language = "de"
-    elif in_lang == "Francés":
-        input_language = "fr"
-    elif in_lang == "Bengalí":
-        input_language = "bn"
-    elif in_lang == "Coreano":
-        input_language = "ko"
-    elif in_lang == "Mandarín":
-        input_language = "zh-cn"
-    elif in_lang == "Japonés":
-        input_language = "ja"
-
-    out_lang = st.selectbox(
-        "Elige el idioma en el que quieres compartartir tu receta",
-        ("Inglés", "Español", "Alemán", "Francés", "Bengalí", "Coreano", "Mandarín", "Japonés"),
-    )
-    if out_lang == "Inglés":
-        output_language = "en"
-    elif out_lang == "Español":
-        output_language = "es"
-    elif out_lang == "Alemán":
-        output_language = "de"
-    elif out_lang == "Francés":
-        output_language = "fr"
-    elif out_lang == "Bengalí":
-        output_language = "bn"
-    elif out_lang == "Coreano":
-        output_language = "ko"
-    elif out_lang == "Mandarín":
-        output_language = "zh-cn"
-    elif out_lang == "Japonés":
-        output_language = "ja"
-
-    english_accent = st.selectbox(
-        "Elige un acento",
-        (
-            "Defecto",
-            "Español",
-            "Reino Unido",
-            "Estados Unidos",
-            "Canada",
-            "Australia",
-            "Irlanda",
-            "Sudáfrica",
-        ),
-    )
-
-    if english_accent == "Defecto":
-        tld = "com"
-    elif english_accent == "Español":
-        tld = "com.mx"
-    elif english_accent == "Reino Unido":
-        tld = "co.uk"
-    elif english_accent == "Estados Unidos":
-        tld = "com"
-    elif english_accent == "Canada":
-        tld = "ca"
-    elif english_accent == "Australia":
-        tld = "com.au"
-    elif english_accent == "Irlanda":
-        tld = "ie"
-    elif english_accent == "Sudáfrica":
-        tld = "co.za"
-
-
-    def text_to_speech(input_language, output_language, text, tld):
-        translation = translator.translate(text, src=input_language, dest=output_language)
-        trans_text = translation.text
-        tts = gTTS(trans_text, lang=output_language, tld=tld, slow=False)
-        try:
-            my_file_name = text[0:20]
-        except:
-            my_file_name = "audio"
-        tts.save(f"temp/{my_file_name}.mp3")
-        return my_file_name, trans_text
-
 
     display_output_text = st.checkbox("Mostrar el texto")
 
