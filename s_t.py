@@ -4,7 +4,6 @@ from bokeh.models.widgets import Button
 from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
 from PIL import Image, ImageDraw, ImageFont
-import time
 
 # Título de la aplicación
 st.title("¡Aprende Lenguaje de Señas Colombiano!")
@@ -53,6 +52,10 @@ stt_button.js_on_event("button_click", CustomJS(code="""
     recognition.start();
 """))
 
+# Mostrar el botón en la aplicación
+st.bokeh_chart(stt_button)
+
+# Funcionalidad de captura de imagen
 result = streamlit_bokeh_events(
     stt_button,
     events="GET_TEXT",
@@ -61,7 +64,6 @@ result = streamlit_bokeh_events(
     override_height=75,
     debounce_time=0)
 
-# Funcionalidad de captura de imagen
 if result:
     if "GET_TEXT" in result:
         st.write("¡Se detectó la palabra 'foto'! Capturando imagen...")
