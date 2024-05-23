@@ -1,9 +1,9 @@
-import os
+mport os
 import streamlit as st
 from bokeh.models.widgets import Button
 from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 # Título de la aplicación
 st.title("¡Aprende Lenguaje de Señas Colombiano!")
@@ -30,11 +30,7 @@ st.write("""
 ## ¡Ponlo en Práctica!
 Captura una característica distintiva, ya sea física, de personalidad o relacionada con una experiencia memorable y crea tu propia seña:
 """)
-
-# Función para capturar la foto
-def capture_photo():
-    st.write("Capturando foto...")
-    st.write("¡Foto capturada con éxito!")
+st.write("Presiona el boton Comienza y di la palabra camara para activarla ")
 
 # Configuración del botón de reconocimiento de voz
 stt_button = Button(label="Comienza", width=200, button_type="success")
@@ -68,16 +64,10 @@ result = streamlit_bokeh_events(
 
 if result and "GET_TEXT" in result:
     command = result.get("GET_TEXT")
+    st.write(f"Comando detectado: {command}")
     if "foto" in command.lower():
         st.write("¡Se detectó la palabra 'foto'! Capturando imagen...")
-        st.write("""
-        <script>
-            document.querySelector('[data-testid="stCamera"]').shadowRoot.querySelector('button').click()
-        </script>
-        """)
-        capture_photo()
-
-        img_file_buffer = st.file_uploader("Sube una imagen", type=["jpg", "jpeg", "png"])
+        img_file_buffer = st.camera_input("Toma una Foto")
 
         if img_file_buffer is not None:
             image = Image.open(img_file_buffer)
