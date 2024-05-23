@@ -64,8 +64,10 @@ result = streamlit_bokeh_events(
     override_height=75,
     debounce_time=0)
 
-if result:
-    if "GET_TEXT" in result:
+if result and "GET_TEXT" in result:
+    command = result.get("GET_TEXT")
+    st.write(f"Comando detectado: {command}")
+    if "foto" in command.lower():
         st.write("¡Se detectó la palabra 'foto'! Capturando imagen...")
         img_file_buffer = st.camera_input("Toma una Foto")
 
