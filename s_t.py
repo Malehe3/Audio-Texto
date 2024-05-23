@@ -30,6 +30,7 @@ st.write("""
 ## ¡Ponlo en Práctica!
 Captura una característica distintiva, ya sea física, de personalidad o relacionada con una experiencia memorable y crea tu propia seña:
 """)
+st.write("Presiona el boton "Comenzar" y di la palabra camara para activarla ")
 
 # Configuración del botón de reconocimiento de voz
 stt_button = Button(label="Comienza", width=200, button_type="success")
