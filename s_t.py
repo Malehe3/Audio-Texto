@@ -47,5 +47,3 @@ if result:
         os.mkdir("temp")
     except:
         pass
-
-    remove_files(7)
