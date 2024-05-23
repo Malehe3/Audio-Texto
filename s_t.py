@@ -52,9 +52,6 @@ stt_button.js_on_event("button_click", CustomJS(code="""
     recognition.start();
 """))
 
-# Mostrar el botón en la aplicación
-st.bokeh_chart(stt_button)
-
 # Funcionalidad de captura de imagen
 result = streamlit_bokeh_events(
     stt_button,
