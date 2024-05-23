@@ -42,22 +42,10 @@ result = streamlit_bokeh_events(
 
 if result:
     if "GET_TEXT" in result:
-        st.subheader("Tu receta: ")
         st.write(result.get("GET_TEXT"))
     try:
         os.mkdir("temp")
     except:
         pass
-
-
-    def remove_files(n):
-        mp3_files = glob.glob("temp/*mp3")
-        if len(mp3_files) != 0:
-            now = time.time()
-            n_days = n * 86400
-            for f in mp3_files:
-                if os.stat(f).st_mtime < now - n_days:
-                    os.remove(f)
-                    print("Deleted ", f)
 
     remove_files(7)
