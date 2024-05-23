@@ -49,19 +49,6 @@ if result:
     except:
         pass
 
-    display_output_text = st.checkbox("Mostrar el texto")
-
-    if st.button("Aceptar"):
-        result, output_text = text_to_speech(input_language, output_language, text, tld)
-        audio_file = open(f"temp/{result}.mp3", "rb")
-        audio_bytes = audio_file.read()
-        st.markdown(f"## Tú audio:")
-        st.audio(audio_bytes, format="audio/mp3", start_time=0)
-
-        if display_output_text:
-            st.write(f"### Ahora puedes compartir tu receta con más personas")
-            st.write(f" {output_text}")
-
 
     def remove_files(n):
         mp3_files = glob.glob("temp/*mp3")
